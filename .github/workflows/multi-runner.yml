@@ -1,0 +1,22 @@
+name: Multi-Runner Operating Systems
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-on-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Test macOS Environment
+        run: |
+          sw_vers
+          echo "Running on Apple Silicon / macOS host."
+
+  run-on-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Test Windows PowerShell Environment
+        shell: powershell
+        run: |
+          Get-ComputerInfo | Select-Object OSName, OSVersion
+          Write-Host "Running on Windows host with PowerShell."
