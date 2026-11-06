@@ -1,0 +1,28 @@
+name: Conditionals and Expressions Demo
+
+on:
+  push:
+    branches: [ main, dev ]
+
+jobs:
+  expression-evaluation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Execute only on Main branch
+        if: github.ref == 'refs/heads/main'
+        run: echo "This step runs exclusively on the MAIN branch."
+
+      - name: Execute if Commit Message Contains FIX
+        if: contains(github.event.head_commit.message, 'fix')
+        run: echo "Fix keyword detected in commit message!"
+
+      - name: Evaluate Status Check Functions - Always Run
+        if: always()
+        run: echo "This step runs ALWAYS, regardless of previous step success or failure."
+
+      - name: Failure Handler Step
+        if: failure()
+        run: echo "This step executes ONLY if a previous step in this job failed."
