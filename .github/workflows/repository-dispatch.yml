@@ -1,0 +1,15 @@
+name: Repository Dispatch Webhook Workflow
+
+on:
+  repository_dispatch:
+    types: [custom_webhook_event]
+
+jobs:
+  dispatch-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle External Dispatch Event
+        run: |
+          echo "Received Repository Dispatch Event!"
+          echo "Event Action Type: ${{ github.event.action }}"
+          echo "Client Payload Data: ${{ github.event.client_payload.message }}"
