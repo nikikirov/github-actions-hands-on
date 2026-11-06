@@ -1,0 +1,1 @@
+name: First Hands-On Workflow on: push: branches: - main jobs: build-and-test: runs-on: ubuntu-latest steps: - name: Check out repository code uses: actions/checkout@v4 - name: Print welcome message run: echo "Hello World! GitHub Actions is running locally from my repo." - name: Display system date and time run: date
