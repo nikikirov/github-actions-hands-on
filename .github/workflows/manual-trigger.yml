@@ -1,0 +1,35 @@
+name: Manual Trigger Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_name:
+        description: "Име на потребителя"
+        required: true
+        default: "Developer"
+      greeting_type:
+        description: "Вид поздравление"
+        required: true
+        type: choice
+        options:
+          - Formal
+          - Casual
+      encoded_payload:
+        description: "Base64 кодирани данни за обработка"
+        required: false
+
+jobs:
+  manual-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Inputs
+        run: |
+          echo "User: ${{ inputs.user_name }}"
+          echo "Greeting Type: ${{ inputs.greeting_type }}"
+
+      - name: Decode Base64 Payload if Provided
+        if: inputs.encoded_payload != ''
+        run: |
+          echo "Decoding payload..."
+          echo "${{ inputs.encoded_payload }}" | base64 --decode
+          echo ""
