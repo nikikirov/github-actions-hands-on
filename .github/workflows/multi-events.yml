@@ -1,0 +1,19 @@
+name: Multi-Event Trigger Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  event-logger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Trigger Event
+        run: |
+          echo "Workflow triggered by event: ${{ github.event_name }}"
+          echo "Target branch: ${{ github.ref }}"
